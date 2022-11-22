@@ -34,6 +34,32 @@ const createTodo = async (req, res) => {
   }
 };
 
+const getTodos = async (req, res) => {
+  try {
+    const todos = await TodoModel.find();
+
+    if (todos.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No todo exists",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Todos fetched successfully",
+      data: todos,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createTodo,
+  getTodos,
 };
