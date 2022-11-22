@@ -205,6 +205,98 @@ const addTaskById = async (req, res) => {
   }
 };
 
+const editTaskNameById = async (req, res) => {
+  try {
+    const todoId = req.params.id;
+    const taskId = req.params.tid;
+
+    const newTaskName = req.body.taskName;
+
+    if (!newTaskName) {
+      return res.status(400).json({
+        success: false,
+        message: "Task name is required.",
+      });
+    }
+
+    const todo = await TodoModel.findById(todoId);
+    if (!todo) {
+      return res.status(404).json({
+        success: false,
+        message: "Todo not found.",
+      });
+    }
+
+    const task = todo.tasks.id(taskId);
+    if (!task) {
+      return res.status(404).json({
+        success: false,
+        message: "Task not found.",
+      });
+    }
+
+    const existingTask = todo.tasks.find((task) => task.name === newTaskName);
+    if (existingTask || task.name === newTaskName) {
+      return res.status(400).json({
+        success: false,
+        message: "Task name should be new and unique.",
+      });
+    }
+
+    task.name = newTaskName;
+    const updatedTodo = await todo.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Task name updated successfully",
+      data: updatedTodo,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const deleteTaskById = async (req, res) => {
+  try {
+    const todoId = req.params.id;
+    const taskId = req.params.tid;
+
+    const todo = await TodoModel.findById(todoId);
+    if (!todo) {
+      return res.status(404).json({
+        success: false,
+        message: "Todo not found.",
+      });
+    }
+
+    const task = todo.tasks.id(taskId);
+    if (!task) {
+      return res.status(404).json({
+        success: false,
+        message: "Task not found.",
+      });
+    }
+
+    task.remove();
+    const updatedTodo = await todo.save();
+    res.status(200).json({
+      success: true,
+      message: "Task deleted successfully",
+      data: updatedTodo,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createTodo,
   getTodos,
@@ -212,4 +304,6 @@ module.exports = {
   deleteTodoById,
   editTitleById,
   addTaskById,
+  editTaskNameById,
+  deleteTaskById,
 };

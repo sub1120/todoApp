@@ -6,6 +6,8 @@ const {
   deleteTodoById,
   editTitleById,
   addTaskById,
+  editTaskNameById,
+  deleteTaskById,
 } = require("../controllers/todoController");
 
 const todoRouter = express.Router();
@@ -32,5 +34,11 @@ todoRouter.put("/editTitle/:id", editTitleById);
 
 //PUT /addTask
 todoRouter.put("/addTask/:id", addTaskById);
+
+//PUT /editTaskName
+todoRouter.put("/editTaskName/:id/task/:tid", editTaskNameById);
+
+//PUT /deleteTask
+todoRouter.put("/deleteTask/:id/task/:tid", deleteTaskById);
 
 module.exports = todoRouter;
