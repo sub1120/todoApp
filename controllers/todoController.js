@@ -15,7 +15,7 @@ const createTodo = async (req, res) => {
     if (existingTodo) {
       return res.status(400).json({
         success: false,
-        message: "Title should be unique.",
+        message: "Title should be new and unique.",
       });
     }
 
@@ -134,7 +134,7 @@ const editTitleById = async (req, res) => {
     }
 
     const existingTodo = await TodoModel.findOne({ title: newTitle });
-    if (existingTodo || todo.title === newTitle) {
+    if (existingTodo) {
       return res.status(400).json({
         success: false,
         message: "Title should be new and unique.",
@@ -166,7 +166,7 @@ const addTaskById = async (req, res) => {
     if (!taskName) {
       return res.status(400).json({
         success: false,
-        message: "Task is required.",
+        message: "Task name is required.",
       });
     }
 
@@ -177,8 +177,6 @@ const addTaskById = async (req, res) => {
         message: "Todo not found",
       });
     }
-
-    console.log(todo);
 
     const existingTask = todo.tasks.find((task) => task.name === taskName);
     if (existingTask) {
@@ -236,7 +234,7 @@ const editTaskNameById = async (req, res) => {
     }
 
     const existingTask = todo.tasks.find((task) => task.name === newTaskName);
-    if (existingTask || task.name === newTaskName) {
+    if (existingTask) {
       return res.status(400).json({
         success: false,
         message: "Task name should be new and unique.",
