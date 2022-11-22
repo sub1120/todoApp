@@ -158,10 +158,58 @@ const editTitleById = async (req, res) => {
   }
 };
 
+const addTaskById = async (req, res) => {
+  try {
+    const todoId = req.params.id;
+    const taskName = req.body.taskName;
+
+    if (!taskName) {
+      return res.status(400).json({
+        success: false,
+        message: "Task is required.",
+      });
+    }
+
+    const todo = await TodoModel.findById(todoId);
+    if (!todo) {
+      return res.status(404).json({
+        success: false,
+        message: "Todo not found",
+      });
+    }
+
+    console.log(todo);
+
+    const existingTask = todo.tasks.find((task) => task.name === taskName);
+    if (existingTask) {
+      return res.status(400).json({
+        success: false,
+        message: "Task name should be new and unique.",
+      });
+    }
+
+    todo.tasks.push({ name: taskName });
+    const updatedTodo = await todo.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Task added successfully",
+      data: updatedTodo,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createTodo,
   getTodos,
   getTodoById,
   deleteTodoById,
   editTitleById,
+  addTaskById,
 };
