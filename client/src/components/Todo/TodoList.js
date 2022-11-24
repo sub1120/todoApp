@@ -11,17 +11,17 @@ const TodoList = () => {
         </thead>
         <tbody>
           <tr className="border-slate-200 border-t-2 text-slate-800">
-            <td className="p-2">
+            <td className="px-4 py-2">
               <Todo title="Todo1" />
             </td>
           </tr>
           <tr className="border-slate-200 border-t-2 text-slate-800">
-            <td className="p-2">
+            <td className="px-4 py-2">
               <Todo title="Todo2" />
             </td>
           </tr>
           <tr className="border-slate-200 border-t-2 text-slate-800">
-            <td className="p-2">
+            <td className="px-4 py-2">
               <Todo title="Todo3" />
             </td>
           </tr>
