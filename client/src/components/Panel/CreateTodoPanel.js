@@ -1,11 +1,11 @@
 import React from "react";
-import TodoInput from "../Input/TodoInput";
 import TodoList from "../Todo/TodoList";
+import CreateTodo from "../Form/CreateTodo";
 
 const CreateTodoPanel = ({ todos }) => {
   return (
     <React.Fragment>
-      <TodoInput></TodoInput>
+      <CreateTodo></CreateTodo>
       <TodoList todos={todos}></TodoList>
     </React.Fragment>
   );

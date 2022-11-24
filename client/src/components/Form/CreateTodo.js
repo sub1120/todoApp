@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Button from "../Button";
 import axios from "axios";
+import Button from "../Button";
 
-const TodoInput = ({ disabled }) => {
+const CreateTodo = (props) => {
   const [title, setTitle] = useState("");
 
   const submitFormHandler = async (event) => {
@@ -20,7 +20,6 @@ const TodoInput = ({ disabled }) => {
 
   const titleHandler = (event) => {
     setTitle(event.target.value);
-    console.log("rrr");
   };
 
   return (
@@ -31,7 +30,6 @@ const TodoInput = ({ disabled }) => {
             <input
               className={`p-3 w-full h-14 border-2 border-slate-300 rounded-md focus:outline-none`}
               placeholder="Title"
-              disabled={disabled}
               value={title}
               onChange={titleHandler}
             ></input>
@@ -49,4 +47,4 @@ const TodoInput = ({ disabled }) => {
   );
 };
 
-export default TodoInput;
+export default CreateTodo;
