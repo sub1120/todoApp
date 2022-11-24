@@ -36,6 +36,7 @@ const createTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
   try {
+    res.header("Access-Control-Allow-Origin", "*");
     const todos = await TodoModel.find();
 
     if (todos.length === 0) {
