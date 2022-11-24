@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../Button";
-import TextInput from "../TextInput";
+import TodoInput from "../Input/TodoInput";
 import TodoList from "../Todo/TodoList";
 
 const CreateTodoPanel = (props) => {
@@ -8,7 +8,7 @@ const CreateTodoPanel = (props) => {
     <React.Fragment>
       <div className="sm:flex sm:space-x-4">
         <div className="my-2 sm:flex-auto sm:basis-4/6">
-          <TextInput placeholder="Title"></TextInput>
+          <TodoInput placeholder="Title"></TodoInput>
         </div>
         <div className="my-2 sm:flex-auto sm:basis-2/6">
           <Button

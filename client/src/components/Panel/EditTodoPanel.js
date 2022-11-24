@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import TaskList from "../Task/TaskList";
 import Button from "../Button";
-import TextInput from "../TextInput";
+import AddButton from "../AddButton";
+import TodoInput from "../Input/TodoInput";
+import TaskInput from "../Input/TaskInput";
 
 const EditTodoPanel = () => {
   const [iseditMode, setEditMode] = useState(false);
@@ -25,15 +27,15 @@ const EditTodoPanel = () => {
       <div className="text-xl font-bold">Todo Info</div>
       <div className="sm:flex sm:space-x-4">
         <div className="my-2 sm:flex-auto sm:basis-2/4">
-          <TextInput
+          <TodoInput
             placeholder="Title"
             disabled={iseditMode ? false : true}
             bgColor={iseditMode ? "bg-white-400" : "bg-slate-200"}
-          ></TextInput>
+          ></TodoInput>
         </div>
         <div className="my-2 sm:flex-auto sm:basis-1/4">
           <Button
-            title={iseditMode ? "Save Title" : "Edit Title"}
+            title={iseditMode ? "Save" : "Edit Title"}
             onClick={iseditMode ? saveHandler : editHandler}
             bgColor="bg-blue-600 hover:bg-blue-800"
           ></Button>
@@ -50,14 +52,11 @@ const EditTodoPanel = () => {
       <TaskList></TaskList>
 
       <div className="sm:flex sm:space-x-4">
-        <div className="my-2 sm:flex-auto sm:basis-4/6">
-          <TextInput placeholder="Task Name"></TextInput>
+        <div className="my-2 sm:flex-auto">
+          <TaskInput placeholder="Task Name"></TaskInput>
         </div>
-        <div className="my-2 sm:flex-auto sm:basis-2/6">
-          <Button
-            title="Add Task"
-            bgColor="bg-blue-600 hover:bg-blue-800"
-          ></Button>
+        <div className="my-2">
+          <AddButton bgColor="bg-blue-600 hover:bg-blue-800"></AddButton>
         </div>
       </div>
     </React.Fragment>
