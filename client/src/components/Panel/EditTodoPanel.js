@@ -37,14 +37,14 @@ const EditTodoPanel = () => {
           <Button
             title={iseditMode ? "Save" : "Edit Title"}
             onClick={iseditMode ? saveHandler : editHandler}
-            bgColor="bg-blue-600 hover:bg-blue-800"
+            bgColor="bg-blue-600 hover:bg-blue-800 active:bg-blue-600"
           ></Button>
         </div>
         <div className="my-2 sm:flex-auto sm:basis-1/4">
           <Button
             title={iseditMode ? "Cancel" : "Delete Todo"}
             onClick={iseditMode ? cancelHandler : deleteHandler}
-            bgColor="bg-red-600 hover:bg-red-800"
+            bgColor="bg-red-600 hover:bg-red-800 active:bg-red-600"
           ></Button>
         </div>
       </div>
@@ -56,7 +56,7 @@ const EditTodoPanel = () => {
           <TaskInput placeholder="Task Name"></TaskInput>
         </div>
         <div className="my-2">
-          <AddButton bgColor="bg-blue-600 hover:bg-blue-800"></AddButton>
+          <AddButton bgColor="bg-blue-600 hover:bg-blue-800 active:bg-blue-600"></AddButton>
         </div>
       </div>
     </React.Fragment>

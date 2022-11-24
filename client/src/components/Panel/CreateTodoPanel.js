@@ -13,7 +13,7 @@ const CreateTodoPanel = (props) => {
         <div className="my-2 sm:flex-auto sm:basis-2/6">
           <Button
             title="Create Todo"
-            bgColor="bg-blue-600 hover:bg-blue-800"
+            bgColor="bg-blue-600 hover:bg-blue-800 active:bg-blue-600"
           ></Button>
         </div>
       </div>
