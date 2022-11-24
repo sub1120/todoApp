@@ -2,7 +2,6 @@ const TodoModel = require("../models/todo");
 
 const createTodo = async (req, res) => {
   try {
-    res.header("Access-Control-Allow-Origin", "*");
     const { title } = req.body;
 
     if (!title) {
@@ -38,7 +37,6 @@ const createTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
   try {
-    res.header("Access-Control-Allow-Origin", "*");
     const todos = await TodoModel.find();
 
     if (todos.length === 0) {
@@ -64,7 +62,6 @@ const getTodos = async (req, res) => {
 
 const getTodoById = async (req, res) => {
   try {
-    res.header("Access-Control-Allow-Origin", "*");
     const todoId = req.params.id;
 
     const todo = await TodoModel.findById(todoId);
@@ -92,7 +89,6 @@ const getTodoById = async (req, res) => {
 
 const deleteTodoById = async (req, res) => {
   try {
-    res.header("Access-Control-Allow-Origin", "*");
     const todoId = req.params.id;
 
     const todo = await TodoModel.findByIdAndDelete(todoId);
@@ -120,7 +116,6 @@ const deleteTodoById = async (req, res) => {
 
 const editTitleById = async (req, res) => {
   try {
-    res.header("Access-Control-Allow-Origin", "*");
     const todoId = req.params.id;
     const newTitle = req.body.title;
 
@@ -166,7 +161,6 @@ const editTitleById = async (req, res) => {
 
 const addTaskById = async (req, res) => {
   try {
-    res.header("Access-Control-Allow-Origin", "*");
     const todoId = req.params.id;
     const taskName = req.body.taskName;
 
@@ -212,7 +206,6 @@ const addTaskById = async (req, res) => {
 
 const editTaskNameById = async (req, res) => {
   try {
-    res.header("Access-Control-Allow-Origin", "*");
     const todoId = req.params.id;
     const taskId = req.params.tid;
 
@@ -268,7 +261,6 @@ const editTaskNameById = async (req, res) => {
 
 const deleteTaskById = async (req, res) => {
   try {
-    res.header("Access-Control-Allow-Origin", "*");
     const todoId = req.params.id;
     const taskId = req.params.tid;
 
