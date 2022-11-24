@@ -1,5 +1,5 @@
-const Todo = ({ taskName }) => {
-  return <div>{taskName}</div>;
+const Todo = ({ title }) => {
+  return <div>{title}</div>;
 };
 
 export default Todo;
