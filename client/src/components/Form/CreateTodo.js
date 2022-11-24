@@ -13,6 +13,8 @@ const CreateTodo = (props) => {
       };
       const todo = await axios.post("http://localhost:4000/createTodo", data);
       console.log(todo);
+
+      setTitle("");
     } catch (error) {
       console.log(error);
     }
