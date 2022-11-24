@@ -1,6 +1,6 @@
 import Todo from "./Todo";
 
-const TodoList = () => {
+const TodoList = ({ todos }) => {
   return (
     <div className="border-slate-200 border-2 rounded-lg h-full">
       <table className="table-auto border-collapse w-full">
@@ -10,21 +10,13 @@ const TodoList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="border-slate-200 border-t-2 text-slate-800">
-            <td className="px-4 py-2">
-              <Todo title="Todo1" />
-            </td>
-          </tr>
-          <tr className="border-slate-200 border-t-2 text-slate-800">
-            <td className="px-4 py-2">
-              <Todo title="Todo2" />
-            </td>
-          </tr>
-          <tr className="border-slate-200 border-t-2 text-slate-800">
-            <td className="px-4 py-2">
-              <Todo title="Todo3" />
-            </td>
-          </tr>
+          {todos.map((todo, i) => (
+            <tr className="border-slate-200 border-t-2 text-slate-800" key={i}>
+              <td className="px-4 py-2">
+                <Todo title={todo.title} />
+              </td>
+            </tr>
+          ))}
           <tr className="border-slate-200 border-t-2 text-slate-800"></tr>
         </tbody>
       </table>

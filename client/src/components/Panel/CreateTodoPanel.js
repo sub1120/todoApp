@@ -3,7 +3,7 @@ import Button from "../Button";
 import TodoInput from "../Input/TodoInput";
 import TodoList from "../Todo/TodoList";
 
-const CreateTodoPanel = (props) => {
+const CreateTodoPanel = ({ todos }) => {
   return (
     <React.Fragment>
       <div className="sm:flex sm:space-x-4">
@@ -17,7 +17,7 @@ const CreateTodoPanel = (props) => {
           ></Button>
         </div>
       </div>
-      <TodoList></TodoList>
+      <TodoList todos={todos}></TodoList>
     </React.Fragment>
   );
 };
