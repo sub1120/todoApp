@@ -7,11 +7,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const loadTodos = async () => {
     try {
-      const res = await axios({
-        method: "get",
-        url: "http://localhost:4000/getTodos",
-      });
-
+      const res = await axios.get("http://localhost:4000/getTodos");
       setTodos(res.data.data);
     } catch (error) {
       console.log(error);
@@ -20,7 +16,7 @@ function App() {
 
   useEffect(() => {
     loadTodos();
-  });
+  }, []);
 
   return (
     <div className="m-5 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
