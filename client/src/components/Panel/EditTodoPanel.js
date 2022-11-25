@@ -4,12 +4,14 @@ import AddButton from "../AddButton";
 import TaskInput from "../Input/TaskInput";
 import EditTodo from "../Form/EditTodo";
 
-const EditTodoPanel = () => {
+const EditTodoPanel = ({ todos, selectedTodo }) => {
+  const todo = todos.find((todo) => todo._id === selectedTodo);
+
   return (
     <React.Fragment>
       <div className="text-xl font-bold">Todo Info</div>
-      <EditTodo></EditTodo>
-      <TaskList></TaskList>
+      <EditTodo currentTitle={todo.title}></EditTodo>
+      <TaskList tasks={todo.tasks}></TaskList>
 
       <div className="sm:flex sm:space-x-4">
         <div className="my-2 sm:flex-auto">

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "../Button";
 
-const EditTodo = (props) => {
+const EditTodo = ({ currentTitle }) => {
   const [title, setTitle] = useState("");
   const [iseditMode, setEditMode] = useState(false);
 
@@ -14,11 +14,11 @@ const EditTodo = (props) => {
     setEditMode(false);
   };
 
-  const saveHandler = (event) => {
-    setEditMode(false);
-  };
-
   const deleteHandler = (event) => {};
+
+  useEffect(() => {
+    setTitle(currentTitle);
+  }, [currentTitle]);
 
   const submitFormHandler = async (event) => {
     try {
@@ -26,8 +26,11 @@ const EditTodo = (props) => {
       const data = {
         title,
       };
-      const todo = await axios.post("http://localhost:4000/editTodo", data);
+      const todo = await axios.put("http://localhost:4000/editTitle", data);
       console.log(todo);
+
+      setTitle("");
+      setEditMode(false);
     } catch (error) {
       console.log(error);
     }
@@ -47,24 +50,34 @@ const EditTodo = (props) => {
                 iseditMode ? "bg-white-400" : "bg-slate-300"
               } rounded-md focus:outline-none`}
               placeholder="Title"
-              value={title}
+              value={iseditMode ? title : currentTitle}
               disabled={iseditMode ? false : true}
               onChange={titleHandler}
             ></input>
           </div>
           <div className="my-2 sm:flex-auto sm:basis-1/4">
-            <Button
-              title={iseditMode ? "Save" : "Edit Title"}
-              onClick={iseditMode ? saveHandler : editHandler}
-              bgColor="bg-blue-600 hover:bg-blue-800 active:bg-blue-600"
-              type={iseditMode ? "submit" : "button"}
-            ></Button>
+            {iseditMode && (
+              <Button
+                title="Save"
+                bgColor="bg-blue-600 hover:bg-blue-800 active:bg-blue-600"
+                type="submit"
+              ></Button>
+            )}
+            {!iseditMode && (
+              <Button
+                title="Edit Title"
+                onClick={editHandler}
+                bgColor="bg-blue-600 hover:bg-blue-800 active:bg-blue-600"
+                type="button"
+              ></Button>
+            )}
           </div>
           <div className="my-2 sm:flex-auto sm:basis-1/4">
             <Button
               title={iseditMode ? "Cancel" : "Delete Todo"}
               onClick={iseditMode ? cancelHandler : deleteHandler}
               bgColor="bg-red-600 hover:bg-red-800 active:bg-red-600"
+              type="button"
             ></Button>
           </div>
         </div>

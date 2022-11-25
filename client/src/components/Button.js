@@ -3,8 +3,8 @@ const Button = ({ title, onClick, bgColor, type }) => {
     <div>
       <button
         className={`w-full h-14 ${bgColor} text-white rounded-md`}
-        onClick={onClick ? onClick : () => {}}
-        type={type ? type : "button"}
+        onClick={onClick}
+        type={type}
       >
         {title}
       </button>
