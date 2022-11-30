@@ -42,11 +42,12 @@ const CreateTodo = ({ appDispatch }) => {
             ></input>
           </div>
           <div className="my-2 sm:flex-auto sm:basis-2/6">
-            <Button
-              title="Create Todo"
-              bgColor="bg-blue-600 hover:bg-blue-800 active:bg-blue-600"
+            <button
+              className={`w-full h-14 bg-blue-600 hover:bg-blue-800 active:bg-blue-600 text-white rounded-md`}
               type="submit"
-            ></Button>
+            >
+              Create Todo
+            </button>
           </div>
         </div>
       </form>

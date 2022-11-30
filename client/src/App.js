@@ -11,7 +11,6 @@ const initialAppState = {
 
 function App() {
   const [appState, dispatch] = useReducer(todoReducer, initialAppState);
-
   const [isLoading, setIsLoading] = useState(true);
 
   const loadTodos = async () => {
@@ -20,7 +19,11 @@ function App() {
       const res = await axios.get("http://localhost:4000/getTodos");
       const todoList = res.data.data;
 
-      dispatch({ type: "init", todos: todoList, selectedTodo: null });
+      dispatch({
+        type: "init",
+        todos: todoList,
+        selectedTodo: null,
+      });
     } catch (error) {
       console.log(error);
     }
