@@ -1,5 +1,6 @@
 import EditTodoPanel from "./components/Panel/EditTodoPanel";
 import CreateTodoPanel from "./components/Panel/CreateTodoPanel";
+import todoReducer from "./todoReducer";
 import { useState, useReducer, useEffect } from "react";
 import axios from "axios";
 
@@ -8,59 +9,8 @@ const initialAppState = {
   selectedTodo: null,
 };
 
-const todoListReducer = (state, action) => {
-  switch (action.type) {
-    case "addTodo": {
-      return {
-        ...state,
-        todos: [
-          ...state.todos,
-          {
-            id: action.id,
-            title: action.title,
-          },
-        ],
-      };
-    }
-    case "deleteTodo": {
-      return {
-        todos: state.todos.filter((todo) => todo.id !== action.id),
-        selectedTodo: null,
-      };
-    }
-    case "select": {
-      return {
-        ...state,
-        selectedTodo: {
-          id: action.todo._id,
-          title: action.todo.title,
-          tasks: action.todo.tasks.map((task) => {
-            return {
-              id: task._id,
-              name: task.name,
-            };
-          }),
-        },
-      };
-    }
-    case "init": {
-      return {
-        todos: action.todos.map((todo) => {
-          return {
-            id: todo._id,
-            title: todo.title,
-          };
-        }),
-        selectedTodo: null,
-      };
-    }
-    default:
-      return state;
-  }
-};
-
 function App() {
-  const [appState, dispatch] = useReducer(todoListReducer, initialAppState);
+  const [appState, dispatch] = useReducer(todoReducer, initialAppState);
 
   const [isLoading, setIsLoading] = useState(true);
 
