@@ -1,26 +1,50 @@
 import React from "react";
+import CreateTask from "../Form/CreateTask";
 import TaskList from "../Task/TaskList";
-import AddButton from "../AddButton";
-import TaskInput from "../Input/TaskInput";
 import EditTodo from "../Form/EditTodo";
+import Button from "../Button";
+import axios from "axios";
 
-const EditTodoPanel = ({ todos, selectedTodo }) => {
-  const todo = todos.find((todo) => todo._id === selectedTodo);
+const EditTodoPanel = ({ selectedTodo, appDispatch }) => {
+  const deleteHandler = async (event) => {
+    try {
+      const res = await axios.post(
+        `http://localhost:4000/deleteTodo/${selectedTodo.id}`
+      );
+
+      const delTodo = res.data.data;
+      appDispatch({
+        type: "deleteTodo",
+        id: delTodo._id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <React.Fragment>
       <div className="text-xl font-bold">Todo Info</div>
-      <EditTodo currentTitle={todo.title}></EditTodo>
-      <TaskList tasks={todo.tasks}></TaskList>
-
-      <div className="sm:flex sm:space-x-4">
-        <div className="my-2 sm:flex-auto">
-          <TaskInput placeholder="Task Name"></TaskInput>
-        </div>
-        <div className="my-2">
-          <AddButton bgColor="bg-blue-600 hover:bg-blue-800 active:bg-blue-600"></AddButton>
-        </div>
+      <div>
+        <Button
+          title="Delete Todo"
+          onClick={deleteHandler}
+          bgColor="bg-red-600 hover:bg-red-800 active:bg-red-600"
+          type="button"
+        ></Button>
       </div>
+      <EditTodo
+        appDispatch={appDispatch}
+        selectedTodo={selectedTodo}
+      ></EditTodo>
+      <TaskList
+        appDispatch={appDispatch}
+        selectedTodo={selectedTodo}
+      ></TaskList>
+      <CreateTask
+        appDispatch={appDispatch}
+        selectedTodo={selectedTodo}
+      ></CreateTask>
     </React.Fragment>
   );
 };

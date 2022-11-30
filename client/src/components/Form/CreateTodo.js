@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Button from "../Button";
 
-const CreateTodo = (props) => {
+const CreateTodo = ({ appDispatch }) => {
   const [title, setTitle] = useState("");
 
   const submitFormHandler = async (event) => {
@@ -12,7 +12,12 @@ const CreateTodo = (props) => {
         title,
       };
       const todo = await axios.post("http://localhost:4000/createTodo", data);
-      console.log(todo);
+
+      appDispatch({
+        type: "addTodo",
+        id: todo.data.data._id,
+        title: todo.data.data.title,
+      });
 
       setTitle("");
     } catch (error) {
