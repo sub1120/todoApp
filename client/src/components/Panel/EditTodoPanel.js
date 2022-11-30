@@ -2,7 +2,6 @@ import React from "react";
 import CreateTask from "../Form/CreateTask";
 import TaskList from "../Task/TaskList";
 import EditTodo from "../Form/EditTodo";
-import Button from "../Button";
 import axios from "axios";
 
 const EditTodoPanel = ({ selectedTodo, appDispatch }) => {
@@ -24,14 +23,16 @@ const EditTodoPanel = ({ selectedTodo, appDispatch }) => {
 
   return (
     <React.Fragment>
-      <div className="text-xl font-bold">Todo Info</div>
-      <div>
-        <Button
-          title="Delete Todo"
-          onClick={deleteHandler}
-          bgColor="bg-red-600 hover:bg-red-800 active:bg-red-600"
-          type="button"
-        ></Button>
+      <div className="flex justify-between">
+        <div className="text-xl font-bold">Todo Info</div>
+        <div className="self-end">
+          <button
+            className={`w-24 h-10 bg-red-600 hover:bg-red-800 active:bg-red-600 text-white rounded-md`}
+            onClick={deleteHandler}
+          >
+            Delete
+          </button>
+        </div>
       </div>
       <EditTodo
         appDispatch={appDispatch}
