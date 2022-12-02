@@ -26,7 +26,8 @@ const Task = ({ selectedTask, selectedTodo, appDispatch }) => {
       const todo = res.data.data;
 
       appDispatch({
-        type: "select",
+        type: "updateTodo",
+        id: todo._id,
         todo: todo,
       });
     } catch (error) {
@@ -43,7 +44,8 @@ const Task = ({ selectedTask, selectedTodo, appDispatch }) => {
       const todo = res.data.data;
 
       appDispatch({
-        type: "select",
+        type: "updateTodo",
+        id: todo._id,
         todo: todo,
       });
     } catch (error) {
@@ -71,7 +73,7 @@ const Task = ({ selectedTask, selectedTodo, appDispatch }) => {
       <div className="mx-2">
         <button
           className={`w-fit h-full text-blue-800 rounded-md`}
-          onClick={iseditMode ? saveHandler : editHandler}
+          onClick={iseditMode ? saveHandler : (e) => setEditMode(true)}
         >
           {iseditMode ? "Save" : "Edit"}
         </button>
@@ -79,7 +81,7 @@ const Task = ({ selectedTask, selectedTodo, appDispatch }) => {
       <div className="mx-2">
         <button
           className={`w-fit h-full text-red-800 rounded-md`}
-          onClick={iseditMode ? cancelHandler : deleteHandler}
+          onClick={iseditMode ? (e) => setEditMode(false) : deleteHandler}
         >
           {iseditMode ? "Cancel" : "Delete"}
         </button>

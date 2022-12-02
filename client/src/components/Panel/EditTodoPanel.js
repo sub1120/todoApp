@@ -1,7 +1,7 @@
 import React from "react";
 import CreateTask from "../Form/CreateTask";
 import TaskList from "../Task/TaskList";
-import EditTodo from "../Form/EditTodo";
+import EditTitle from "../Form/EditTitle";
 import axios from "axios";
 
 const EditTodoPanel = ({ selectedTodo, appDispatch }) => {
@@ -11,10 +11,10 @@ const EditTodoPanel = ({ selectedTodo, appDispatch }) => {
         `http://localhost:4000/deleteTodo/${selectedTodo.id}`
       );
 
-      const delTodo = res.data.data;
+      const todo = res.data.data;
       appDispatch({
         type: "deleteTodo",
-        id: delTodo._id,
+        id: todo._id,
       });
     } catch (error) {
       console.log(error);
@@ -23,9 +23,9 @@ const EditTodoPanel = ({ selectedTodo, appDispatch }) => {
 
   return (
     <React.Fragment>
-      <div className="flex justify-between">
+      <div className="flex justify-between my-2">
         <div className="text-xl font-bold">Todo Info</div>
-        <div className="self-end">
+        <div>
           <button
             className={`w-24 h-10 bg-red-600 hover:bg-red-800 active:bg-red-600 text-white rounded-md`}
             onClick={deleteHandler}
@@ -34,14 +34,19 @@ const EditTodoPanel = ({ selectedTodo, appDispatch }) => {
           </button>
         </div>
       </div>
-      <EditTodo
-        appDispatch={appDispatch}
-        selectedTodo={selectedTodo}
-      ></EditTodo>
+
+      <div>
+        <EditTitle
+          appDispatch={appDispatch}
+          selectedTodo={selectedTodo}
+        ></EditTitle>
+      </div>
+
       <TaskList
         appDispatch={appDispatch}
         selectedTodo={selectedTodo}
       ></TaskList>
+
       <CreateTask
         appDispatch={appDispatch}
         selectedTodo={selectedTodo}

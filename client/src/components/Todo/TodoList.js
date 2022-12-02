@@ -10,8 +10,8 @@ const TodoList = ({ todos, appDispatch }) => {
       const todo = res.data.data;
 
       appDispatch({
-        type: "select",
-        todo: todo,
+        type: "setSelectedTodoId",
+        id: todo._id,
       });
     } catch (error) {
       console.log(error);

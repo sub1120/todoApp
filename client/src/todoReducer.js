@@ -15,33 +15,49 @@ const todoReducer = (state, action) => {
     case "deleteTodo": {
       return {
         todos: state.todos.filter((todo) => todo.id !== action.id),
-        selectedTodo: null,
+        selectedTodoId: null,
       };
     }
-    case "select": {
+    case "setSelectedTodoId": {
       return {
         ...state,
-        selectedTodo: {
-          id: action.todo._id,
-          title: action.todo.title,
-          tasks: action.todo.tasks.map((task) => {
-            return {
-              id: task._id,
-              name: task.name,
-            };
-          }),
-        },
+        selectedTodoId: action.id,
       };
     }
-    case "init": {
+    case "updateTodo": {
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          return todo.id === action.id
+            ? {
+                ...todo,
+                title: action.todo.title,
+                tasks: action.todo.tasks.map((task) => {
+                  return {
+                    id: task._id,
+                    name: task.name,
+                  };
+                }),
+              }
+            : todo;
+        }),
+      };
+    }
+    case "loadTodos": {
       return {
         todos: action.todos.map((todo) => {
           return {
             id: todo._id,
             title: todo.title,
+            tasks: todo.tasks.map((task) => {
+              return {
+                id: task._id,
+                name: task.name,
+              };
+            }),
           };
         }),
-        selectedTodo: null,
+        selectedTodoId: action.id,
       };
     }
     default:

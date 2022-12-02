@@ -18,7 +18,8 @@ const CreateTask = ({ selectedTodo, appDispatch }) => {
       const todo = res.data.data;
 
       appDispatch({
-        type: "select",
+        type: "updateTodo",
+        id: todo._id,
         todo: todo,
       });
 
