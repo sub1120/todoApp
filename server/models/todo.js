@@ -19,14 +19,18 @@ const TodoSchema = new mongoose.Schema(
       type: Date,
       default: null,
       get: (date) => {
-        return date ? date.toDateString() : null;
+        return date
+          ? `${date.getDay()}-${date.getMonth()} ${date.toTimeString()}`
+          : null;
       },
     },
     modifiedDate: {
       type: Date,
       default: null,
       get: (date) => {
-        return date ? date.toDateString() : null;
+        return date
+          ? `${date.getDay()}-${date.getMonth()} ${date.toTimeString()}`
+          : null;
       },
     },
   },
