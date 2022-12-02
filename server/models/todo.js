@@ -7,14 +7,33 @@ const TaskSchema = new mongoose.Schema({
   },
 });
 
-const TodoSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-    unique: true,
+const TodoSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    tasks: [TaskSchema],
+    createdDate: {
+      type: Date,
+      default: null,
+      get: (date) => {
+        return date ? date.toDateString() : null;
+      },
+    },
+    modifiedDate: {
+      type: Date,
+      default: null,
+      get: (date) => {
+        return date ? date.toDateString() : null;
+      },
+    },
   },
-  tasks: [TaskSchema],
-});
+  {
+    toJSON: { getters: true, setters: true },
+  }
+);
 
 const TodoModel = mongoose.model("todo", TodoSchema);
 

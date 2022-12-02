@@ -19,7 +19,7 @@ const createTodo = async (req, res) => {
       });
     }
 
-    const todo = await TodoModel.create({ title });
+    const todo = await TodoModel.create({ title, createdDate: new Date() });
 
     res.status(201).json({
       success: true,
@@ -143,6 +143,7 @@ const editTitleById = async (req, res) => {
     }
 
     todo.title = newTitle;
+    todo.modifiedDate = new Date();
     const updatedTodo = await todo.save();
 
     res.status(200).json({
@@ -188,6 +189,7 @@ const addTaskById = async (req, res) => {
     }
 
     todo.tasks.push({ name: taskName });
+    todo.modifiedDate = new Date();
     const updatedTodo = await todo.save();
 
     res.status(200).json({
@@ -243,6 +245,7 @@ const editTaskNameById = async (req, res) => {
     }
 
     task.name = newTaskName;
+    todo.modifiedDate = new Date();
     const updatedTodo = await todo.save();
 
     res.status(200).json({
@@ -281,6 +284,7 @@ const deleteTaskById = async (req, res) => {
     }
 
     task.remove();
+    todo.modifiedDate = new Date();
     const updatedTodo = await todo.save();
     res.status(200).json({
       success: true,
