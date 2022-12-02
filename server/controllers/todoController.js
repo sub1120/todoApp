@@ -37,7 +37,12 @@ const createTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
   try {
-    const todos = await TodoModel.find();
+    const { options } = req.body;
+
+    const todos =
+      options && options.sort === "descending"
+        ? await TodoModel.find().sort({ createdDate: -1 })
+        : await TodoModel.find();
 
     if (todos.length === 0) {
       return res.status(404).json({
