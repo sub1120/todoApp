@@ -1,67 +1,85 @@
+import {
+  createBrowserRouter,
+  redirect,
+  RouterProvider,
+} from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 import EditTodoPanel from "./components/Panel/EditTodoPanel";
-import CreateTodoPanel from "./components/Panel/CreateTodoPanel";
-import todoReducer from "./todoReducer";
-import { useState, useReducer, useEffect } from "react";
-import axios from "axios";
+import SignUp from "./pages/SignUp";
+import { Client, Account } from "appwrite";
 
-const initialAppState = {
-  todos: [],
-  selectedTodoId: null,
-};
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />,
+    loader: async () => {
+      const client = new Client()
+        .setEndpoint(
+          "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us77.gitpod.io/v1"
+        )
+        .setProject("63899ef6418947ff2d89");
+
+      const account = new Account(client);
+      const user = account.get();
+
+      if (!user) {
+        return redirect("/login");
+      } else {
+        return redirect("/dashboard");
+      }
+    },
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    loader: async () => {
+      const client = new Client()
+        .setEndpoint(
+          "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us77.gitpod.io/v1"
+        )
+        .setProject("63899ef6418947ff2d89");
+
+      const account = new Account(client);
+      const user = account.get();
+
+      if (user) {
+        return redirect("/dashboard");
+      }
+    },
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+    loader: async () => {
+      const client = new Client()
+        .setEndpoint(
+          "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us77.gitpod.io/v1"
+        )
+        .setProject("63899ef6418947ff2d89");
+
+      const account = new Account(client);
+      const user = account.get();
+
+      if (user) {
+        return redirect("/dashboard");
+      }
+    },
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "todo/:todoId",
+        element: <EditTodoPanel />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  const [appState, dispatch] = useReducer(todoReducer, initialAppState);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const loadTodos = async () => {
-    setIsLoading(true);
-    try {
-      const res = await axios.get("http://localhost:4000/getTodos");
-      const todoList = res.data.data;
-      const initialSelectedTodo = todoList[0]._id;
-      dispatch({
-        type: "loadTodos",
-        todos: todoList,
-        selectedTodoId: initialSelectedTodo, //todo id
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    loadTodos();
-  }, []);
-
-  if (isLoading) {
-    return <div>Loading....</div>;
-  }
-
-  const selectedTodo = appState.todos.find(
-    (todo) => todo.id === appState.selectedTodoId
-  );
-
-  return (
-    <div className="m-5 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
-      <div className="flex flex-col h-screen lg:basis-1/2">
-        <CreateTodoPanel
-          todos={appState.todos}
-          selectedTodo={appState.selectedTodo}
-          appDispatch={dispatch}
-        ></CreateTodoPanel>
-      </div>
-      <div className="flex flex-col h-screen border-2 p-6 rounded-md lg:basis-1/2">
-        {appState.selectedTodoId && (
-          <EditTodoPanel
-            selectedTodo={selectedTodo}
-            key={selectedTodo}
-            appDispatch={dispatch}
-          ></EditTodoPanel>
-        )}
-      </div>
-    </div>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;
