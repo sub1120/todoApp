@@ -17,28 +17,28 @@ todoRouter.get("/", (req, res) =>
   res.status(200).send("Welcome from Todo App")
 );
 
-//POST /addTodo
-todoRouter.post("/createTodo", createTodo);
+//POST /todo
+todoRouter.post("/todo", createTodo);
 
-//GET /getTodos
-todoRouter.get("/getTodos", getTodos);
+//GET /todo
+todoRouter.get("/todo", getTodos);
 
-//GET /getTodo
-todoRouter.get("/getTodo/:id", getTodoById);
+//GET /todo/:id
+todoRouter.get("/todo/:id", getTodoById);
 
-//POST /delTodo
-todoRouter.post("/deleteTodo/:id", deleteTodoById);
+//DELETE /todo/:id
+todoRouter.delete("/todo/:id", deleteTodoById);
 
-//PUT /editTodoTitle
-todoRouter.put("/editTitle/:id", editTitleById);
+//PUT /todo/:id
+todoRouter.put("/todo/:id", editTitleById);
 
-//PUT /addTask
-todoRouter.put("/addTask/:id", addTaskById);
+//PUT /todo/:id/task
+todoRouter.put("/todo/:id/task", addTaskById);
 
-//PUT /editTaskName
-todoRouter.put("/editTaskName/:id/task/:tid", editTaskNameById);
+//PUT /todo/:id/task/:tid
+todoRouter.put("/todo/:id/task/:tid", editTaskNameById);
 
-//PUT /deleteTask
-todoRouter.put("/deleteTask/:id/task/:tid", deleteTaskById);
+//DELETE /todo/:id/task/:tid
+todoRouter.delete("/todo/:id/task/:tid", deleteTaskById);
 
 module.exports = todoRouter;
