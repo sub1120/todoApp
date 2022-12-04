@@ -4,7 +4,7 @@ const TodoList = ({ todos, appDispatch }) => {
   const onClickHandler = async (e) => {
     try {
       const res = await axios.get(
-        `http://localhost:4000/getTodo/${e.target.id}`
+        `http://localhost:4000/api/v1/todo/${e.target.id}`
       );
 
       const todo = res.data.data;

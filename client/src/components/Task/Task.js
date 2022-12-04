@@ -9,18 +9,10 @@ const Task = ({ selectedTask, selectedTodo, appDispatch }) => {
     setTaskName(selectedTask.name);
   }, [selectedTask]);
 
-  const editHandler = (event) => {
-    setEditMode(true);
-  };
-
-  const cancelHandler = (event) => {
-    setEditMode(false);
-  };
-
   const saveHandler = async (event) => {
     try {
       const res = await axios.put(
-        `http://localhost:4000/editTaskName/${selectedTodo.id}/task/${selectedTask.id}`,
+        `http://localhost:4000/api/v1/todo/${selectedTodo.id}/task/${selectedTask.id}`,
         { taskName }
       );
       const todo = res.data.data;
@@ -38,8 +30,8 @@ const Task = ({ selectedTask, selectedTodo, appDispatch }) => {
 
   const deleteHandler = async (event) => {
     try {
-      const res = await axios.put(
-        `http://localhost:4000/deleteTask/${selectedTodo.id}/task/${selectedTask.id}`
+      const res = await axios.delete(
+        `http://localhost:4000/api/v1/todo/${selectedTodo.id}/task/${selectedTask.id}`
       );
       const todo = res.data.data;
 

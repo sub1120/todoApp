@@ -17,7 +17,7 @@ const EditTitle = ({ selectedTodo, appDispatch }) => {
         title,
       };
       const res = await axios.put(
-        `http://localhost:4000/editTitle/${selectedTodo.id}`,
+        `http://localhost:4000/api/v1/todo/${selectedTodo.id}`,
         data
       );
       const todo = res.data.data;

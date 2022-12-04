@@ -17,7 +17,7 @@ const Dashboard = ({ user, setUser }) => {
   const loadTodos = async () => {
     setIsLoading(true);
     try {
-      const res = await axios.get("http://localhost:4000/getTodos");
+      const res = await axios.get("http://localhost:4000/api/v1/todo");
       const todoList = res.data.data;
       const initialSelectedTodo = todoList[0]._id;
       dispatch({

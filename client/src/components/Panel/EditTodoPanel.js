@@ -7,8 +7,8 @@ import axios from "axios";
 const EditTodoPanel = ({ selectedTodo, appDispatch }) => {
   const deleteHandler = async (event) => {
     try {
-      const res = await axios.post(
-        `http://localhost:4000/deleteTodo/${selectedTodo.id}`
+      const res = await axios.delete(
+        `http://localhost:4000/api/v1/todo/${selectedTodo.id}`
       );
 
       const todo = res.data.data;

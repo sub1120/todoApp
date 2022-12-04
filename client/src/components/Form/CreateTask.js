@@ -12,7 +12,7 @@ const CreateTask = ({ selectedTodo, appDispatch }) => {
         taskName,
       };
       const res = await axios.put(
-        `http://localhost:4000/addTask/${selectedTodo.id}`,
+        `http://localhost:4000/api/v1/todo/${selectedTodo.id}/task`,
         data
       );
       const todo = res.data.data;
