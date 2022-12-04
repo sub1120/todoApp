@@ -3,10 +3,11 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+
+import Dashboard from "./pages/dashboard/Dashboard";
 import EditTodoPanel from "./components/Panel/EditTodoPanel";
-import SignUp from "./pages/SignUp";
+import Login from "./pages/auth/Login";
+import SignUp from "./pages/auth/SignUp";
 import { Client, Account } from "appwrite";
 
 const router = createBrowserRouter([

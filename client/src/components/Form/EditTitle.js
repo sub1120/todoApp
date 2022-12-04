@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Button from "../Button";
+import { editTitle } from "../../bridge/todo";
 
 const EditTitle = ({ selectedTodo, appDispatch }) => {
   const [title, setTitle] = useState(selectedTodo.title);
@@ -11,27 +11,20 @@ const EditTitle = ({ selectedTodo, appDispatch }) => {
   }, [selectedTodo]);
 
   const onSubmitHandler = async (event) => {
-    try {
-      event.preventDefault();
-      const data = {
-        title,
-      };
-      const res = await axios.put(
-        `http://localhost:4000/api/v1/todo/${selectedTodo.id}`,
-        data
-      );
-      const todo = res.data.data;
+    event.preventDefault();
+    const todo = await editTitle(selectedTodo.id, title);
 
-      appDispatch({
-        type: "updateTodo",
-        id: todo._id,
-        todo: todo,
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setEditMode(false);
+    if (!todo) {
+      return;
     }
+
+    appDispatch({
+      type: "updateTodo",
+      id: todo._id,
+      todo: todo,
+    });
+
+    setEditMode(false);
   };
 
   const titleHandler = (event) => {

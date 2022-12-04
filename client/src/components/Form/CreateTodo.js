@@ -1,27 +1,24 @@
 import { useState } from "react";
-import axios from "axios";
+import { createTodo } from "../../bridge/todo";
 
 const CreateTodo = ({ appDispatch }) => {
   const [title, setTitle] = useState("");
 
   const onSubmitHandler = async (event) => {
-    try {
-      event.preventDefault();
-      const data = {
-        title,
-      };
-      const todo = await axios.post("http://localhost:4000/createTodo", data);
+    event.preventDefault();
 
-      appDispatch({
-        type: "addTodo",
-        id: todo.data.data._id,
-        title: todo.data.data.title,
-      });
+    const todo = await createTodo(title);
 
-      setTitle("");
-    } catch (error) {
-      console.log(error);
+    if (!todo) {
+      return;
     }
+
+    appDispatch({
+      type: "addTodo",
+      id: todo._id,
+      title: todo.title,
+    });
+    setTitle("");
   };
 
   const onChangeHandler = (event) => {

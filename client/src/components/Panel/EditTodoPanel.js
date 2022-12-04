@@ -2,23 +2,20 @@ import React from "react";
 import CreateTask from "../Form/CreateTask";
 import TaskList from "../Task/TaskList";
 import EditTitle from "../Form/EditTitle";
-import axios from "axios";
+import { deleteTodo } from "../../bridge/todo";
 
 const EditTodoPanel = ({ selectedTodo, appDispatch }) => {
   const deleteHandler = async (event) => {
-    try {
-      const res = await axios.delete(
-        `http://localhost:4000/api/v1/todo/${selectedTodo.id}`
-      );
+    const todo = await deleteTodo(selectedTodo.id);
 
-      const todo = res.data.data;
-      appDispatch({
-        type: "deleteTodo",
-        id: todo._id,
-      });
-    } catch (error) {
-      console.log(error);
+    if (!todo) {
+      return;
     }
+
+    appDispatch({
+      type: "deleteTodo",
+      id: todo._id,
+    });
   };
 
   return (

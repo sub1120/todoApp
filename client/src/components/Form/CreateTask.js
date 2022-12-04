@@ -1,32 +1,26 @@
 import { useState } from "react";
-import axios from "axios";
 import AddButton from "../AddButton";
+import { addTask } from "../../bridge/todo";
 
 const CreateTask = ({ selectedTodo, appDispatch }) => {
   const [taskName, setTaskName] = useState("");
 
   const submitFormHandler = async (event) => {
-    try {
-      event.preventDefault();
-      const data = {
-        taskName,
-      };
-      const res = await axios.put(
-        `http://localhost:4000/api/v1/todo/${selectedTodo.id}/task`,
-        data
-      );
-      const todo = res.data.data;
+    event.preventDefault();
 
-      appDispatch({
-        type: "updateTodo",
-        id: todo._id,
-        todo: todo,
-      });
+    const todo = await addTask(selectedTodo.id, taskName);
 
-      setTaskName("");
-    } catch (error) {
-      console.log(error);
+    if (!todo) {
+      return null;
     }
+
+    appDispatch({
+      type: "updateTodo",
+      id: todo._id,
+      todo: todo,
+    });
+
+    setTaskName("");
   };
 
   const taskHandler = (event) => {

@@ -1,21 +1,17 @@
-import axios from "axios";
+import { fetchTodo } from "../../bridge/todo";
 
 const TodoList = ({ todos, appDispatch }) => {
   const onClickHandler = async (e) => {
-    try {
-      const res = await axios.get(
-        `http://localhost:4000/api/v1/todo/${e.target.id}`
-      );
+    const todo = await fetchTodo(e.target.id);
 
-      const todo = res.data.data;
-
-      appDispatch({
-        type: "setSelectedTodoId",
-        id: todo._id,
-      });
-    } catch (error) {
-      console.log(error);
+    if (!todo) {
+      return;
     }
+
+    appDispatch({
+      type: "setSelectedTodoId",
+      id: todo._id,
+    });
   };
 
   return (

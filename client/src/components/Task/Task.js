@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { deleteTask, editTaskName } from "../../bridge/todo";
 
 const Task = ({ selectedTask, selectedTodo, appDispatch }) => {
   const [iseditMode, setEditMode] = useState(false);
@@ -10,39 +10,33 @@ const Task = ({ selectedTask, selectedTodo, appDispatch }) => {
   }, [selectedTask]);
 
   const saveHandler = async (event) => {
-    try {
-      const res = await axios.put(
-        `http://localhost:4000/api/v1/todo/${selectedTodo.id}/task/${selectedTask.id}`,
-        { taskName }
-      );
-      const todo = res.data.data;
+    const todo = await editTaskName(selectedTodo.id, selectedTask.id, taskName);
 
-      appDispatch({
-        type: "updateTodo",
-        id: todo._id,
-        todo: todo,
-      });
-    } catch (error) {
-      console.log(error);
+    if (!todo) {
+      return;
     }
+
+    appDispatch({
+      type: "updateTodo",
+      id: todo._id,
+      todo: todo,
+    });
+
     setEditMode(false);
   };
 
   const deleteHandler = async (event) => {
-    try {
-      const res = await axios.delete(
-        `http://localhost:4000/api/v1/todo/${selectedTodo.id}/task/${selectedTask.id}`
-      );
-      const todo = res.data.data;
+    const todo = await deleteTask(selectedTodo.id, selectedTask.id);
 
-      appDispatch({
-        type: "updateTodo",
-        id: todo._id,
-        todo: todo,
-      });
-    } catch (error) {
-      console.log(error);
+    if (!todo) {
+      return;
     }
+
+    appDispatch({
+      type: "updateTodo",
+      id: todo._id,
+      todo: todo,
+    });
   };
 
   const onChangeHandler = (e) => {
