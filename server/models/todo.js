@@ -33,6 +33,10 @@ const TodoSchema = new mongoose.Schema(
           : null;
       },
     },
+    userId: {
+      type: String,
+      required: true,
+    },
   },
   {
     toJSON: { getters: true, setters: true },
