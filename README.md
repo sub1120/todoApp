@@ -4,9 +4,6 @@ Sample View:-
 
 ![Screenshot from 2022-12-08 00-17-37](https://user-images.githubusercontent.com/43786036/206270420-59c028c1-d801-4a1d-8fba-f602656ff4a6.png)
 
-Backend API :-
-https://documenter.getpostman.com/view/21420925/2s8YzQWPZ8
-
 Tech Stack:-
 
 <img  src="https://img.shields.io/badge/React-Front%20End-Blue">  
