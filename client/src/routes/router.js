@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 
+//import pages and components
 import Dashboard from "../pages/dashboard/Dashboard";
 import EditTodoPanel from "../components/Panel/EditTodoPanel";
 import Login from "../pages/auth/Login";
 import SignUp from "../pages/auth/SignUp";
 
+//import loaders
 import {
   loginLoader,
   signupLoader,
@@ -12,6 +14,8 @@ import {
   todoLoader,
   rootLoader,
 } from "./loader";
+
+//import actions
 import {
   addTaskAction,
   createTodoAction,
