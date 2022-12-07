@@ -23,6 +23,9 @@ export const todoListLoader = async ({ params }) => {
                   };
                 })
               : [],
+          modifiedDate: todo.modifiedDate
+            ? todo.modifiedDate
+            : todo.createdDate,
         };
       })
     : [];

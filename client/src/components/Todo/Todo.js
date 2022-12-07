@@ -1,10 +1,11 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Todo = ({ todoId, title }) => {
+const Todo = ({ todoId, title, modifiedDate }) => {
   return (
     <NavLink
       className={({ isActive, isPending }) => {
-        const base = "block w-full px-4 py-2";
+        const base = "block flex justify-between w-full p-2";
         return isActive
           ? `${base} bg-blue-600 text-white`
           : isPending
@@ -13,7 +14,10 @@ const Todo = ({ todoId, title }) => {
       }}
       to={`todo/${todoId}`}
     >
-      {title}
+      <div className="p-1">{title}</div>
+      <div className="bg-emerald-600 text-white p-1 rounded">
+        {modifiedDate}
+      </div>
     </NavLink>
   );
 };

@@ -12,7 +12,11 @@ const TodoList = ({ todos }) => {
           <li className="text-slate-800 p-2">Todos</li>
           {todos.map((todo) => (
             <li key={todo.id} className="border-slate-200 border-t-2">
-              <Todo todoId={todo.id} title={todo.title}></Todo>
+              <Todo
+                todoId={todo.id}
+                title={todo.title}
+                modifiedDate={todo.modifiedDate}
+              ></Todo>
             </li>
           ))}
           <li className="border-slate-200 border-t-2 text-slate-800"></li>
