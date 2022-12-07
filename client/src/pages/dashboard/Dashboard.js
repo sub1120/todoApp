@@ -12,10 +12,11 @@ const Dashboard = () => {
         <CreateTodo></CreateTodo>
         <TodoList todos={todoData}></TodoList>
       </div>
-      <div className="flex flex-col h-screen border-2 p-6 rounded-md lg:basis-1/2">
-        <div id="details">
-          <Outlet></Outlet>
-        </div>
+      <div
+        id="details"
+        className="flex flex-col h-screen border-2 p-6 rounded-md lg:basis-1/2"
+      >
+        <Outlet></Outlet>
       </div>
     </div>
   );

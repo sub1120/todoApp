@@ -2,7 +2,8 @@ import React from "react";
 import CreateTask from "../Form/CreateTask";
 import TaskList from "../Task/TaskList";
 import EditTitle from "../Form/EditTitle";
-import { Form, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+import DeleteTodo from "../Form/DeleteTodo";
 
 const EditTodoPanel = () => {
   const selectedTodo = useLoaderData();
@@ -11,24 +12,15 @@ const EditTodoPanel = () => {
     <React.Fragment>
       <div className="flex justify-between my-2">
         <div className="text-xl font-bold">Todo Info</div>
-        <Form method="post" action="delete">
-          <div>
-            <button
-              className={`w-24 h-10 bg-red-600 hover:bg-red-800 active:bg-red-600 text-white rounded-md`}
-            >
-              Delete
-            </button>
-          </div>
-        </Form>
+        <DeleteTodo></DeleteTodo>
       </div>
       <div>
-        <EditTitle
-          key={selectedTodo.id}
-          selectedTodo={selectedTodo}
-        ></EditTitle>
+        <EditTitle selectedTodo={selectedTodo}></EditTitle>
       </div>
-      <TaskList key={selectedTodo.id} selectedTodo={selectedTodo}></TaskList>
-      <CreateTask selectedTodo={selectedTodo}></CreateTask>
+      <div>
+        <TaskList selectedTodo={selectedTodo}></TaskList>
+        <CreateTask></CreateTask>
+      </div>
     </React.Fragment>
   );
 };

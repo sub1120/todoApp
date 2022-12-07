@@ -14,12 +14,15 @@ export const todoListLoader = async ({ params }) => {
         return {
           id: todo._id,
           title: todo.title,
-          tasks: todo.tasks.map((task) => {
-            return {
-              id: task._id,
-              name: task.name,
-            };
-          }),
+          tasks:
+            todo.tasks.length !== 0
+              ? todo.tasks.map((task) => {
+                  return {
+                    id: task._id,
+                    name: task.name,
+                  };
+                })
+              : [],
         };
       })
     : [];
@@ -29,7 +32,23 @@ export const todoListLoader = async ({ params }) => {
 
 export const todoLoader = async ({ params }) => {
   const data = await fetchTodo(params.todoId);
-  return data;
+  const updatedData = data
+    ? {
+        id: data._id,
+        title: data.title,
+        tasks:
+          data.tasks.length !== 0
+            ? data.tasks.map((task) => {
+                return {
+                  id: task._id,
+                  name: task.name,
+                };
+              })
+            : [],
+      }
+    : null;
+
+  return updatedData;
 };
 
 export const signupLoader = async () => {

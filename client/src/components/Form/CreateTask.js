@@ -1,4 +1,3 @@
-import AddButton from "../AddButton";
 import { Form } from "react-router-dom";
 
 const CreateTask = () => {
@@ -15,7 +14,20 @@ const CreateTask = () => {
             ></input>
           </div>
           <div className="my-2">
-            <AddButton bgColor="bg-blue-600 hover:bg-blue-800 active:bg-blue-600"></AddButton>
+            <button className="w-8 h-8 p-1 bg-blue-600 hover:bg-blue-800 active:bg-blue-600 text-white rounded-md">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100%"
+                height="100%"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </Form>
