@@ -1,39 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Button from "../Button";
-import { editTitle } from "../../bridge/todo";
+import { Form } from "react-router-dom";
 
-const EditTitle = ({ selectedTodo, appDispatch }) => {
-  const [title, setTitle] = useState(selectedTodo.title);
+const EditTitle = ({ selectedTodo }) => {
   const [iseditMode, setEditMode] = useState(false);
 
+  console.log(selectedTodo);
+
   useEffect(() => {
-    setTitle(selectedTodo.title);
-  }, [selectedTodo]);
-
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
-    const todo = await editTitle(selectedTodo.id, title);
-
-    if (!todo) {
-      return;
-    }
-
-    appDispatch({
-      type: "updateTodo",
-      id: todo._id,
-      todo: todo,
-    });
-
     setEditMode(false);
-  };
-
-  const titleHandler = (event) => {
-    setTitle(event.target.value);
-  };
+  }, [selectedTodo]);
 
   return (
     <React.Fragment>
-      <form onSubmit={onSubmitHandler}>
+      <Form method="post" action="edit">
         <div className="sm:flex sm:space-x-4">
           <div className="my-2 sm:flex-auto">
             <input
@@ -41,9 +21,10 @@ const EditTitle = ({ selectedTodo, appDispatch }) => {
                 iseditMode ? "bg-white-400" : "bg-slate-300"
               } rounded-md focus:outline-none`}
               placeholder="Title"
-              value={title}
+              name="title"
               disabled={!iseditMode}
-              onChange={titleHandler}
+              defaultValue={selectedTodo.title}
+              key={selectedTodo.id}
             ></input>
           </div>
           {!iseditMode && (
@@ -76,7 +57,7 @@ const EditTitle = ({ selectedTodo, appDispatch }) => {
             </div>
           )}
         </div>
-      </form>
+      </Form>
     </React.Fragment>
   );
 };

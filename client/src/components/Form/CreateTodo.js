@@ -1,40 +1,16 @@
-import { useState } from "react";
-import { createTodo } from "../../bridge/todo";
+import { Form } from "react-router-dom";
 
-const CreateTodo = ({ appDispatch }) => {
-  const [title, setTitle] = useState("");
-
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
-
-    const todo = await createTodo(title);
-
-    if (!todo) {
-      return;
-    }
-
-    appDispatch({
-      type: "addTodo",
-      id: todo._id,
-      title: todo.title,
-    });
-    setTitle("");
-  };
-
-  const onChangeHandler = (event) => {
-    setTitle(event.target.value);
-  };
-
+const CreateTodo = () => {
   return (
     <div>
-      <form onSubmit={onSubmitHandler}>
+      <Form method="post" action="new">
         <div className="sm:flex sm:space-x-4">
           <div className="my-2 sm:flex-auto sm:basis-4/6">
             <input
               className="p-3 w-full h-14 border-2 border-slate-300 rounded-md focus:outline-none"
               placeholder="Title"
-              value={title}
-              onChange={onChangeHandler}
+              name="title"
+              defaultValue=""
             ></input>
           </div>
           <div className="my-2 sm:flex-auto sm:basis-2/6">
@@ -46,7 +22,7 @@ const CreateTodo = ({ appDispatch }) => {
             </button>
           </div>
         </div>
-      </form>
+      </Form>
     </div>
   );
 };

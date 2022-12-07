@@ -11,7 +11,10 @@ const createTodo = async (req, res) => {
       });
     }
 
-    const existingTodo = await TodoModel.findOne({ title });
+    const existingTodo = await TodoModel.findOne({
+      title,
+      userId: req.body.userId,
+    });
     if (existingTodo) {
       return res.status(400).json({
         success: false,
@@ -19,7 +22,11 @@ const createTodo = async (req, res) => {
       });
     }
 
-    const todo = await TodoModel.create({ title, createdDate: new Date() });
+    const todo = await TodoModel.create({
+      title,
+      createdDate: new Date(),
+      userId: req.body.userId,
+    });
 
     res.status(201).json({
       success: true,

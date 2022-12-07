@@ -2,52 +2,33 @@ import React from "react";
 import CreateTask from "../Form/CreateTask";
 import TaskList from "../Task/TaskList";
 import EditTitle from "../Form/EditTitle";
-import { deleteTodo } from "../../bridge/todo";
+import { Form, useLoaderData } from "react-router-dom";
 
-const EditTodoPanel = ({ selectedTodo, appDispatch }) => {
-  const deleteHandler = async (event) => {
-    const todo = await deleteTodo(selectedTodo.id);
-
-    if (!todo) {
-      return;
-    }
-
-    appDispatch({
-      type: "deleteTodo",
-      id: todo._id,
-    });
-  };
+const EditTodoPanel = () => {
+  const selectedTodo = useLoaderData();
 
   return (
     <React.Fragment>
       <div className="flex justify-between my-2">
         <div className="text-xl font-bold">Todo Info</div>
-        <div>
-          <button
-            className={`w-24 h-10 bg-red-600 hover:bg-red-800 active:bg-red-600 text-white rounded-md`}
-            onClick={deleteHandler}
-          >
-            Delete
-          </button>
-        </div>
+        <Form method="post" action="delete">
+          <div>
+            <button
+              className={`w-24 h-10 bg-red-600 hover:bg-red-800 active:bg-red-600 text-white rounded-md`}
+            >
+              Delete
+            </button>
+          </div>
+        </Form>
       </div>
-
       <div>
         <EditTitle
-          appDispatch={appDispatch}
+          key={selectedTodo.id}
           selectedTodo={selectedTodo}
         ></EditTitle>
       </div>
-
-      <TaskList
-        appDispatch={appDispatch}
-        selectedTodo={selectedTodo}
-      ></TaskList>
-
-      <CreateTask
-        appDispatch={appDispatch}
-        selectedTodo={selectedTodo}
-      ></CreateTask>
+      <TaskList key={selectedTodo.id} selectedTodo={selectedTodo}></TaskList>
+      <CreateTask selectedTodo={selectedTodo}></CreateTask>
     </React.Fragment>
   );
 };

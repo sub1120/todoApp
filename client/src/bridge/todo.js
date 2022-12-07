@@ -60,10 +60,10 @@ export const deleteTodo = async (todoId) => {
   return null;
 };
 
-export const editTitle = async (todoId, newTitle) => {
+export const editTitle = async (todoId, title) => {
   try {
     const data = {
-      title: newTitle,
+      title,
     };
     const res = await axios.put(
       `http://localhost:4000/api/v1/todo/${todoId}`,
