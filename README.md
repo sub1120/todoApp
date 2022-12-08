@@ -6,6 +6,7 @@
 <img  src="https://img.shields.io/badge/MongoDB-Database-yellowgreen">  
 <img  src="https://img.shields.io/badge/appwrite-auth-red">  
 
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a2e93f1b22c7fee4097e?action=collection%2Fimport)
 
 Sample View:-
 
