@@ -1,6 +1,7 @@
 # todoApp
 
-<img  src="https://img.shields.io/badge/React-Front%20End-Blue">  
+<img  src="https://img.shields.io/badge/React-UI-blue">  
+<img  src="https://img.shields.io/badge/react--router-Client%20Side%20Routing-important">  
 <img  src="https://img.shields.io/badge/Tailwind%20CSS-Styling-blueviolet">
 <img  src="https://img.shields.io/badge/Express-Back%20End-blue">  
 <img  src="https://img.shields.io/badge/MongoDB-Database-yellowgreen">  
