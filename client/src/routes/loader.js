@@ -6,8 +6,10 @@ export const rootLoader = () => {
   redirect("/dashboard");
 };
 
-export const todoListLoader = async ({ params }) => {
-  const data = await fetchTodos();
+export const todoListLoader = async ({ params, request }) => {
+  const url = new URL(request.url);
+  const order = url.searchParams.get("sort");
+  const data = await fetchTodos(order);
 
   const updatedData = data
     ? data.map((todo) => {
@@ -30,7 +32,7 @@ export const todoListLoader = async ({ params }) => {
       })
     : [];
 
-  return updatedData;
+  return { todoData: updatedData, order: order };
 };
 
 export const todoLoader = async ({ params }) => {

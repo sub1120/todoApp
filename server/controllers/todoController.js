@@ -21,8 +21,8 @@ const createTodo = async (req, res) => {
         message: "Title should be new and unique.",
       });
     }
-
     const currentDate = new Date();
+
     const todo = await TodoModel.create({
       title,
       createdDate: currentDate,
@@ -46,7 +46,12 @@ const createTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
   try {
-    const todos = await TodoModel.find();
+    const { sort } = req.query;
+
+    const todos =
+      sort && sort === "desc"
+        ? await TodoModel.find().sort({ modifiedDate: -1 })
+        : await TodoModel.find().sort({ modifiedDate: 1 });
 
     if (todos.length === 0) {
       return res.status(404).json({

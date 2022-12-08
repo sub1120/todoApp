@@ -1,8 +1,10 @@
 import axios from "axios";
 
-export const fetchTodos = async () => {
+export const fetchTodos = async (order) => {
   try {
-    const res = await axios.get("http://localhost:4000/api/v1/todo");
+    const res = await axios.get(
+      `http://localhost:4000/api/v1/todo?sort=${order}`
+    );
     const todoList = res.data.data;
 
     return todoList;
