@@ -15,9 +15,7 @@ const Todo = ({ todoId, title, modifiedDate }) => {
       to={`todo/${todoId}`}
     >
       <div className="p-1">{title}</div>
-      <div className="bg-emerald-600 text-white p-1 rounded">
-        {modifiedDate}
-      </div>
+      <div className="text-slate-300 p-1 rounded">{modifiedDate}</div>
     </NavLink>
   );
 };
