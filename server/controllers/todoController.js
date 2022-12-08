@@ -46,12 +46,22 @@ const createTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
   try {
-    const { sort } = req.query;
+    const { sort, q } = req.query;
+
+    const searchQuery = q
+      ? {
+          title: { $regex: new RegExp(q.toLowerCase(), "i") },
+        }
+      : {};
 
     const todos =
       sort && sort === "desc"
-        ? await TodoModel.find().sort({ modifiedDate: -1 })
-        : await TodoModel.find().sort({ modifiedDate: 1 });
+        ? await TodoModel.find(searchQuery).sort({
+            modifiedDate: -1,
+          })
+        : await TodoModel.find(searchQuery).sort({
+            modifiedDate: 1,
+          });
 
     if (todos.length === 0) {
       return res.status(404).json({

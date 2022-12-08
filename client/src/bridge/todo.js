@@ -1,9 +1,11 @@
 import axios from "axios";
 
-export const fetchTodos = async (order) => {
+export const fetchTodos = async (order, searchTitle) => {
   try {
     const res = await axios.get(
-      `http://localhost:4000/api/v1/todo?sort=${order}`
+      `http://localhost:4000/api/v1/todo?sort=${
+        order !== null ? order : ""
+      }&q=${searchTitle !== null ? searchTitle : ""}`
     );
     const todoList = res.data.data;
 

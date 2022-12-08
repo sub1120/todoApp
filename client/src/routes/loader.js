@@ -9,7 +9,8 @@ export const rootLoader = () => {
 export const todoListLoader = async ({ params, request }) => {
   const url = new URL(request.url);
   const order = url.searchParams.get("sort");
-  const data = await fetchTodos(order);
+  const searchTitle = url.searchParams.get("q");
+  const data = await fetchTodos(order, searchTitle);
 
   const updatedData = data
     ? data.map((todo) => {
