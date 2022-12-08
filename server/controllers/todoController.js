@@ -22,9 +22,11 @@ const createTodo = async (req, res) => {
       });
     }
 
+    const currentDate = new Date();
     const todo = await TodoModel.create({
       title,
-      createdDate: new Date(),
+      createdDate: currentDate,
+      modifiedDate: currentDate,
       userId: req.body.userId,
     });
 
@@ -44,12 +46,7 @@ const createTodo = async (req, res) => {
 
 const getTodos = async (req, res) => {
   try {
-    const { options } = req.body;
-
-    const todos =
-      options && options.sort === "descending"
-        ? await TodoModel.find().sort({ createdDate: -1 })
-        : await TodoModel.find();
+    const todos = await TodoModel.find();
 
     if (todos.length === 0) {
       return res.status(404).json({
