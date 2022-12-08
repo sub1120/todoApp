@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 
 //import pages and components
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -12,7 +12,6 @@ import {
   signupLoader,
   todoListLoader,
   todoLoader,
-  rootLoader,
 } from "./loader";
 
 //import actions
@@ -28,8 +27,9 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
-    loader: rootLoader,
+    loader: () => {
+      return redirect("/dashboard");
+    },
   },
   {
     path: "/login",
