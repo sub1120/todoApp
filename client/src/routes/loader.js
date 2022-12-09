@@ -7,6 +7,25 @@ export const rootLoader = () => {
 };
 
 export const todoListLoader = async ({ params, request }) => {
+  let user = null;
+
+  try {
+    const client = new Client()
+      .setEndpoint(
+        "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us78.gitpod.io/v1"
+      )
+      .setProject("63899ef6418947ff2d89");
+
+    const account = new Account(client);
+    user = await account.get();
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!user) {
+    return redirect("/login");
+  }
+
   const url = new URL(request.url);
   const order = url.searchParams.get("sort");
   const searchTitle = url.searchParams.get("q");
@@ -33,7 +52,7 @@ export const todoListLoader = async ({ params, request }) => {
       })
     : [];
 
-  return { todoData: updatedData, order: order };
+  return { todoData: updatedData, order: order, user: user };
 };
 
 export const todoLoader = async ({ params }) => {
@@ -58,33 +77,43 @@ export const todoLoader = async ({ params }) => {
 };
 
 export const signupLoader = async () => {
-  const client = new Client()
-    .setEndpoint(
-      "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us77.gitpod.io/v1"
-    )
-    .setProject("63899ef6418947ff2d89");
+  try {
+    const client = new Client()
+      .setEndpoint(
+        "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us78.gitpod.io/v1"
+      )
+      .setProject("63899ef6418947ff2d89");
 
-  const account = new Account(client);
-  const user = account.get();
+    const account = new Account(client);
+    const user = await account.get();
 
-  if (user) {
-    return redirect("/dashboard");
+    if (user) {
+      return redirect("/dashboard");
+    }
+  } catch (error) {
+    console.log(error);
   }
+
+  return null;
 };
 
 export const loginLoader = async () => {
-  const client = new Client()
-    .setEndpoint(
-      "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us77.gitpod.io/v1"
-    )
-    .setProject("63899ef6418947ff2d89");
+  try {
+    const client = new Client()
+      .setEndpoint(
+        "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us78.gitpod.io/v1"
+      )
+      .setProject("63899ef6418947ff2d89");
 
-  const account = new Account(client);
-  const user = account.get();
+    const account = new Account(client);
+    const user = await account.get();
 
-  if (!user) {
-    return redirect("/login");
-  } else {
-    return redirect("/dashboard");
+    if (user) {
+      return redirect("/dashboard");
+    }
+  } catch (error) {
+    console.log(error);
   }
+
+  return null;
 };

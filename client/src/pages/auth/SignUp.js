@@ -1,81 +1,33 @@
-import { Client, Account, ID } from "appwrite";
-import { useState } from "react";
+import { Form } from "react-router-dom";
 
-const SignUp = ({ setUser }) => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-
-  const onNameChange = (e) => {
-    setFormData({
-      ...formData,
-      username: e.target.value,
-    });
-  };
-  const onEmailChange = (e) => {
-    setFormData({
-      ...formData,
-      email: e.target.value,
-    });
-  };
-  const onPasswordChange = (e) => {
-    setFormData({
-      ...formData,
-      password: e.target.value,
-    });
-  };
-
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const client = new Client()
-        .setEndpoint(
-          "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us77.gitpod.io/v1"
-        )
-        .setProject("63899ef6418947ff2d89");
-
-      const account = new Account(client);
-      const { email, password, username } = formData;
-
-      const user = await account.create(ID.unique(), email, password, username);
-      await account.createEmailSession(email, password);
-
-      setUser(user);
-      console.log("User created successfully", user);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+const SignUp = () => {
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="w-72">
         <h1 className="text-3xl">Sign Up</h1>
-        <form onSubmit={onSubmitHandler}>
+        <Form method="post" action="/signup">
           <div className="my-2">
             <input
               className="p-3 w-full h-12 border-2 border-slate-300 rounded-md focus:outline-none"
               placeholder="Username"
-              value={formData.username}
-              onChange={onNameChange}
+              defaultValue=""
+              name="username"
             ></input>
           </div>
           <div className="my-2">
             <input
               className="p-3 w-full h-12 border-2 border-slate-300 rounded-md focus:outline-none"
               placeholder="Email"
-              value={formData.email}
-              onChange={onEmailChange}
+              defaultValue=""
+              name="email"
             ></input>
           </div>
           <div className="my-2">
             <input
               className="p-3 w-full h-12 border-2 border-slate-300 rounded-md focus:outline-none"
               placeholder="Password"
-              value={formData.password}
-              onChange={onPasswordChange}
+              defaultValue=""
+              name="password"
             ></input>
           </div>
           <div className="my-2">
@@ -85,7 +37,7 @@ const SignUp = ({ setUser }) => {
               Submit
             </button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   );

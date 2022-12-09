@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 
 //import pages and components
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -18,22 +18,32 @@ import {
 import {
   addTaskAction,
   createTodoAction,
+  createUserAction,
   deleteTaskAction,
   deleteTodoAction,
   editTaskNameAction,
   editTitleAction,
+  loginUserAction,
 } from "./action";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    loader: () => {
+      return redirect("/dashboard");
+    },
+  },
+  {
     path: "/login",
     element: <Login />,
     loader: loginLoader,
+    action: loginUserAction,
   },
   {
     path: "/signup",
     element: <SignUp />,
     loader: signupLoader,
+    action: createUserAction,
   },
   {
     path: "/dashboard",
