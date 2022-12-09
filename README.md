@@ -8,6 +8,4 @@
 <img  src="https://img.shields.io/badge/appwrite-auth-red">  
 
 Sample View:-
-
-![Screenshot from 2022-12-08 15-55-18](https://user-images.githubusercontent.com/43786036/206423108-3c205123-0aef-4c35-972b-7e948d70c879.png)
-
+![image](https://user-images.githubusercontent.com/43786036/206683167-09b14660-41bf-49e2-a639-163280855862.png)
