@@ -26,7 +26,14 @@ Body
 ```
 GET /api/v1/todo
 ```
-  
+
+Body
+```JSON
+{
+  "userId": "12sada3"
+}
+```
+
 Optional Query Params
 |Param| Description|
 |-----|------------|
@@ -39,12 +46,24 @@ Optional Query Params
 ```
 POST api/v1/todo/:todoId
 ```
-
+Body
+```JSON
+{
+  "userId": "12sada3"
+}
+```
 
 ### 4. Delete Unique Todo
 
 ```
 DEL api/v1/todo/:todoId
+```
+
+Body
+```JSON
+{
+  "userId": "12sada3"
+}
 ```
 
 ### 5. Edit Title
@@ -56,7 +75,8 @@ PUT api/v1/todo/:todoId
 Body
 ```JSON
 {
-  "title": "new Title"
+  "title": "new Title",
+  "userId": "12sada3"
 }
 ```
 
@@ -69,7 +89,8 @@ PUT api/v1/todo/:todoId/task
 Body
 ```JSON
 {
-  "taskName": "Task2"
+  "taskName": "Task2",
+  "userId": "12sada3"
 }
 ```
 
@@ -82,7 +103,8 @@ PUT api/v1/todo/:todoId/task/:taskId
 Body
 ```JSON
 {
-  "taskName": "new Task Name"
+  "taskName": "new Task Name",
+  "userId": "12sada3"
 }
 ```
 
@@ -91,4 +113,11 @@ Body
 
 ```
 DEL api/v1/todo/:todoId/:taskId
+```
+
+Body
+```JSON
+{
+  "userId": "12sada3"
+}
 ```
