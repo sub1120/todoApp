@@ -4,7 +4,6 @@
 
 <img  src="https://img.shields.io/badge/Express-Back%20End-blue">  <img  src="https://img.shields.io/badge/MongoDB-Database-yellowgreen">  <img  src="https://img.shields.io/badge/appwrite-auth-red">  
 
-Sample View:-
 ![image](https://user-images.githubusercontent.com/43786036/206683167-09b14660-41bf-49e2-a639-163280855862.png)
 
 ### 1. Create New Todo
