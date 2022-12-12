@@ -93,7 +93,7 @@ Body
 }
 ```
 
-### 6. Edit Taskname
+### 7. Edit Taskname
 
 ```
 PUT api/v1/todo/:todoId/task/:taskId
@@ -108,7 +108,7 @@ Body
 ```
 
 
-### 4. Delete Unique Task
+### 8. Delete Unique Task
 
 ```
 DEL api/v1/todo/:todoId/:taskId
