@@ -1,26 +1,13 @@
 import { redirect } from "react-router-dom";
 import { fetchTodo, fetchTodos } from "../bridge/todo";
-import { Client, Account } from "appwrite";
+import { getUser } from "../bridge/user";
 
 export const rootLoader = () => {
   redirect("/dashboard");
 };
 
 export const todoListLoader = async ({ params, request }) => {
-  let user = null;
-
-  try {
-    const client = new Client()
-      .setEndpoint(
-        "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us78.gitpod.io/v1"
-      )
-      .setProject("63899ef6418947ff2d89");
-
-    const account = new Account(client);
-    user = await account.get();
-  } catch (error) {
-    console.log(error);
-  }
+  const user = await getUser();
 
   if (!user) {
     return redirect("/login");
@@ -77,42 +64,20 @@ export const todoLoader = async ({ params }) => {
 };
 
 export const signupLoader = async () => {
-  try {
-    const client = new Client()
-      .setEndpoint(
-        "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us78.gitpod.io/v1"
-      )
-      .setProject("63899ef6418947ff2d89");
+  const user = await getUser();
 
-    const account = new Account(client);
-    const user = await account.get();
-
-    if (user) {
-      return redirect("/dashboard");
-    }
-  } catch (error) {
-    console.log(error);
+  if (user) {
+    return redirect("/dashboard");
   }
 
   return null;
 };
 
 export const loginLoader = async () => {
-  try {
-    const client = new Client()
-      .setEndpoint(
-        "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us78.gitpod.io/v1"
-      )
-      .setProject("63899ef6418947ff2d89");
+  const user = await getUser();
 
-    const account = new Account(client);
-    const user = await account.get();
-
-    if (user) {
-      return redirect("/dashboard");
-    }
-  } catch (error) {
-    console.log(error);
+  if (user) {
+    return redirect("/dashboard");
   }
 
   return null;

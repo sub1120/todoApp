@@ -1,9 +1,11 @@
+import { Form } from "react-router-dom";
+
 const Login = () => {
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="w-72">
         <h1 className="text-3xl">Login</h1>
-        <form method="post" action="/login">
+        <Form method="post" action="/login">
           <div className="my-2">
             <input
               className="p-3 w-full h-12 border-2 border-slate-300 rounded-md focus:outline-none"
@@ -27,7 +29,7 @@ const Login = () => {
               Login
             </button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   );

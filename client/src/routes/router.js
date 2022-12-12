@@ -24,6 +24,7 @@ import {
   editTaskNameAction,
   editTitleAction,
   loginUserAction,
+  logoutUserAction,
 } from "./action";
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
     element: <Login />,
     loader: loginLoader,
     action: loginUserAction,
+  },
+  {
+    path: "/logout",
+    action: logoutUserAction,
   },
   {
     path: "/signup",
