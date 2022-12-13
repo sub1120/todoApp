@@ -1,7 +1,8 @@
 import React from "react";
 import CreateTodo from "../components/Form/CreateTodo";
 import TodoList from "../components/Todo/TodoList";
-import { Form, Outlet, useLoaderData } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
+import LogoutUser from "../components/Form/LogoutUser";
 
 const Dashboard = () => {
   const { todoData, order, user } = useLoaderData();
@@ -10,11 +11,7 @@ const Dashboard = () => {
     <React.Fragment>
       <div className="p-5 flex justify-between border-b-2">
         <div className="text-2xl font-bold">Welcome Dear {user.name}</div>
-        <Form method="post" action="/logout">
-          <button className="text-white bg-emerald-600 p-2 rounded">
-            Logout
-          </button>
-        </Form>
+        <LogoutUser />
       </div>
       <div className="m-5 flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
         <div className="flex flex-col h-screen lg:basis-1/2">
