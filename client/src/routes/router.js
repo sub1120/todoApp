@@ -1,10 +1,10 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 
 //import pages and components
-import Dashboard from "../pages/dashboard/Dashboard";
+import Dashboard from "../pages/Dashboard";
 import EditTodoPanel from "../components/Panel/EditTodoPanel";
-import Login from "../pages/auth/Login";
-import SignUp from "../pages/auth/SignUp";
+import Login from "../pages/Login";
+import SignUp from "../pages/SignUp";
 
 //import loaders
 import {

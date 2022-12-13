@@ -1,6 +1,6 @@
 import React from "react";
-import CreateTodo from "../../components/Form/CreateTodo";
-import TodoList from "../../components/Todo/TodoList";
+import CreateTodo from "../components/Form/CreateTodo";
+import TodoList from "../components/Todo/TodoList";
 import { Form, Outlet, useLoaderData } from "react-router-dom";
 
 const Dashboard = () => {
