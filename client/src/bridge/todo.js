@@ -3,9 +3,9 @@ import axios from "axios";
 export const fetchTodos = async (order, searchTitle) => {
   try {
     const res = await axios.get(
-      `http://localhost:4000/api/v1/todo?sort=${
-        order !== null ? order : ""
-      }&q=${searchTitle !== null ? searchTitle : ""}`
+      `/api/v1/todo?sort=${order !== null ? order : ""}&q=${
+        searchTitle !== null ? searchTitle : ""
+      }`
     );
     const todoList = res.data.data;
 
@@ -19,7 +19,7 @@ export const fetchTodos = async (order, searchTitle) => {
 
 export const fetchTodo = async (todoId) => {
   try {
-    const res = await axios.get(`http://localhost:4000/api/v1/todo/${todoId}`);
+    const res = await axios.get(`/todo/${todoId}`);
 
     const todo = res.data.data;
 
@@ -37,7 +37,7 @@ export const createTodo = async (title) => {
       title,
       userId: 123,
     };
-    const res = await axios.post("http://localhost:4000/api/v1/todo", data);
+    const res = await axios.post("/api/v1/todo", data);
     const todo = res.data.data;
 
     return todo;
@@ -50,9 +50,7 @@ export const createTodo = async (title) => {
 
 export const deleteTodo = async (todoId) => {
   try {
-    const res = await axios.delete(
-      `http://localhost:4000/api/v1/todo/${todoId}`
-    );
+    const res = await axios.delete(`/api/v1/todo/${todoId}`);
 
     const todo = res.data.data;
 
@@ -69,10 +67,7 @@ export const editTitle = async (todoId, title) => {
     const data = {
       title,
     };
-    const res = await axios.put(
-      `http://localhost:4000/api/v1/todo/${todoId}`,
-      data
-    );
+    const res = await axios.put(`/api/v1/todo/${todoId}`, data);
     const todo = res.data.data;
     return todo;
   } catch (error) {
@@ -87,10 +82,7 @@ export const addTask = async (todoId, taskName) => {
     const data = {
       taskName,
     };
-    const res = await axios.put(
-      `http://localhost:4000/api/v1/todo/${todoId}/task`,
-      data
-    );
+    const res = await axios.put(`/api/v1/todo/${todoId}/task`, data);
     const todo = res.data.data;
     return todo;
   } catch (error) {
@@ -101,9 +93,7 @@ export const addTask = async (todoId, taskName) => {
 
 export const deleteTask = async (todoId, taskId) => {
   try {
-    const res = await axios.delete(
-      `http://localhost:4000/api/v1/todo/${todoId}/task/${taskId}`
-    );
+    const res = await axios.delete(`/api/v1/todo/${todoId}/task/${taskId}`);
     const todo = res.data.data;
 
     return todo;
@@ -119,10 +109,7 @@ export const editTaskName = async (todoId, taskId, newTaskName) => {
       taskName: newTaskName,
     };
 
-    const res = await axios.put(
-      `http://localhost:4000/api/v1/todo/${todoId}/task/${taskId}`,
-      data
-    );
+    const res = await axios.put(`/api/v1/todo/${todoId}/task/${taskId}`, data);
     const todo = res.data.data;
 
     return todo;

@@ -4,7 +4,7 @@ export const getAccount = () => {
   try {
     const client = new Client()
       .setEndpoint(
-        "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us78.gitpod.io/v1"
+        "https://8080-appwrite-integrationfor-5909t3u9vwa.ws-us79.gitpod.io/v1"
       )
       .setProject("63899ef6418947ff2d89");
 
