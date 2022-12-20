@@ -3,15 +3,20 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    lowercase: true,
+    required: [true, "Required"],
+    match: [/^[a-zA-Z\s]+$/, "Only letters allowed"],
   },
   email: {
     type: String,
-    required: true,
+    unique: true,
+    lowercase: true,
+    required: [true, "Required"],
+    match: [/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/, "Invalid email address"],
   },
   password: {
     type: String,
-    required: true,
+    required: [true, "Required"],
   },
 });
 

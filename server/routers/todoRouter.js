@@ -12,33 +12,28 @@ const {
 
 const todoRouter = express.Router();
 
-//GET /
-todoRouter.get("/", (req, res) =>
-  res.status(200).send("Welcome from Todo App")
-);
-
 //POST /todo
-todoRouter.post("/todo", createTodo);
+todoRouter.post("/", createTodo);
 
 //GET /todo
-todoRouter.get("/todo", getTodos);
+todoRouter.get("/", getTodos);
 
 //GET /todo/:id
-todoRouter.get("/todo/:id", getTodoById);
+todoRouter.get("/:id", getTodoById);
 
 //DELETE /todo/:id
-todoRouter.delete("/todo/:id", deleteTodoById);
+todoRouter.delete("/:id", deleteTodoById);
 
 //PUT /todo/:id
-todoRouter.put("/todo/:id", editTitleById);
+todoRouter.put("/:id", editTitleById);
 
 //PUT /todo/:id/task
-todoRouter.put("/todo/:id/task", addTaskById);
+todoRouter.put("/:id/task", addTaskById);
 
 //PUT /todo/:id/task/:tid
-todoRouter.put("/todo/:id/task/:tid", editTaskNameById);
+todoRouter.put("/:id/task/:tid", editTaskNameById);
 
 //DELETE /todo/:id/task/:tid
-todoRouter.delete("/todo/:id/task/:tid", deleteTaskById);
+todoRouter.delete("/:id/task/:tid", deleteTaskById);
 
 module.exports = todoRouter;
