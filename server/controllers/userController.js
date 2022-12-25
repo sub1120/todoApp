@@ -91,7 +91,7 @@ const login = async (req, res) => {
     //create and save token
     existingUser.token = await jwt.sign(
       {
-        id: user._id,
+        id: existingUser._id,
         email,
       },
       process.env.SECRET,

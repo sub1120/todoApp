@@ -29,10 +29,6 @@ const TodoSchema = new mongoose.Schema(
         return date ? `${date.toLocaleString()}` : null;
       },
     },
-    userId: {
-      type: String,
-      required: true,
-    },
   },
   {
     toJSON: { getters: true, setters: true },

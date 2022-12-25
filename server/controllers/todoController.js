@@ -11,10 +11,7 @@ const createTodo = async (req, res) => {
       });
     }
 
-    const existingTodo = await TodoModel.findOne({
-      title,
-      userId: req.body.userId,
-    });
+    const existingTodo = await TodoModel.findOne({ title });
     if (existingTodo) {
       return res.status(400).json({
         success: false,
