@@ -1,8 +1,10 @@
 const TodoModel = require("../models/todo");
+const UserModel = require("../models/user");
 
 const createTodo = async (req, res) => {
   try {
     const { title } = req.body;
+    const userId = req.user.id;
 
     if (!title) {
       return res.status(400).json({
@@ -11,7 +13,7 @@ const createTodo = async (req, res) => {
       });
     }
 
-    const existingTodo = await TodoModel.findOne({ title });
+    const existingTodo = await TodoModel.findOne({ title, userId });
     if (existingTodo) {
       return res.status(400).json({
         success: false,
@@ -24,7 +26,7 @@ const createTodo = async (req, res) => {
       title,
       createdDate: currentDate,
       modifiedDate: currentDate,
-      userId: req.body.userId,
+      userId,
     });
 
     res.status(201).json({
@@ -44,10 +46,12 @@ const createTodo = async (req, res) => {
 const getTodos = async (req, res) => {
   try {
     const { sort, q } = req.query;
+    const userId = req.user.id;
 
     const searchQuery = q
       ? {
           title: { $regex: new RegExp(q.toLowerCase(), "i") },
+          userId,
         }
       : {};
 

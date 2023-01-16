@@ -18,12 +18,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Required"],
   },
-  todos: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "todo",
-    },
-  ],
 });
 
 const UserModel = mongoose.model("user", UserSchema);

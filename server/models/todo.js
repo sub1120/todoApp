@@ -12,7 +12,6 @@ const TodoSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique: true,
     },
     tasks: [TaskSchema],
     createdDate: {
@@ -28,6 +27,10 @@ const TodoSchema = new mongoose.Schema(
       get: (date) => {
         return date ? `${date.toLocaleString()}` : null;
       },
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
     },
   },
   {
