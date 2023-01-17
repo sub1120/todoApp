@@ -19,7 +19,7 @@ export const fetchTodos = async (order, searchTitle) => {
 
 export const fetchTodo = async (todoId) => {
   try {
-    const res = await axios.get(`/todo/${todoId}`);
+    const res = await axios.get(`/api/v1/todo/${todoId}`);
 
     const todo = res.data.data;
 
@@ -33,10 +33,7 @@ export const fetchTodo = async (todoId) => {
 
 export const createTodo = async (title) => {
   try {
-    const data = {
-      title,
-      userId: 123,
-    };
+    const data = { title };
     const res = await axios.post("/api/v1/todo", data);
     const todo = res.data.data;
 
@@ -64,9 +61,7 @@ export const deleteTodo = async (todoId) => {
 
 export const editTitle = async (todoId, title) => {
   try {
-    const data = {
-      title,
-    };
+    const data = { title };
     const res = await axios.put(`/api/v1/todo/${todoId}`, data);
     const todo = res.data.data;
     return todo;
@@ -79,9 +74,7 @@ export const editTitle = async (todoId, title) => {
 
 export const addTask = async (todoId, taskName) => {
   try {
-    const data = {
-      taskName,
-    };
+    const data = { taskName };
     const res = await axios.put(`/api/v1/todo/${todoId}/task`, data);
     const todo = res.data.data;
     return todo;
@@ -105,9 +98,7 @@ export const deleteTask = async (todoId, taskId) => {
 
 export const editTaskName = async (todoId, taskId, newTaskName) => {
   try {
-    const data = {
-      taskName: newTaskName,
-    };
+    const data = { taskName: newTaskName };
 
     const res = await axios.put(`/api/v1/todo/${todoId}/task/${taskId}`, data);
     const todo = res.data.data;

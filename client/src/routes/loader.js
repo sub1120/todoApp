@@ -44,6 +44,7 @@ export const todoListLoader = async ({ params, request }) => {
 
 export const todoLoader = async ({ params }) => {
   const data = await fetchTodo(params.todoId);
+  console.log(data);
   const updatedData = data
     ? {
         id: data._id,

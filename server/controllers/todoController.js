@@ -1,5 +1,4 @@
 const TodoModel = require("../models/todo");
-const UserModel = require("../models/user");
 
 const createTodo = async (req, res) => {
   try {
@@ -53,7 +52,7 @@ const getTodos = async (req, res) => {
           title: { $regex: new RegExp(q.toLowerCase(), "i") },
           userId,
         }
-      : {};
+      : { userId };
 
     const todos =
       sort && sort === "desc"

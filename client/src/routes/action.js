@@ -1,5 +1,6 @@
 import { redirect } from "react-router-dom";
 import { register, login, logout } from "../bridge/user";
+import { getUser } from "../bridge/user";
 import {
   addTask,
   createTodo,
@@ -73,7 +74,9 @@ export const loginUserAction = async ({ params, request }) => {
 };
 
 export const logoutUserAction = async ({ params, request }) => {
-  const user = await logout();
+  await logout();
+
+  const user = await getUser();
 
   if (user) {
     return redirect(`/dashboard`);
