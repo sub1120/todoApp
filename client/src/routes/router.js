@@ -7,12 +7,7 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 
 //import loaders
-import {
-  loginLoader,
-  signupLoader,
-  todoListLoader,
-  todoLoader,
-} from "./loader";
+import { todoListLoader, todoLoader } from "./loader";
 
 //import actions
 import {
@@ -37,7 +32,6 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-    loader: loginLoader,
     action: loginUserAction,
   },
   {
@@ -47,7 +41,6 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
-    loader: signupLoader,
     action: createUserAction,
   },
   {

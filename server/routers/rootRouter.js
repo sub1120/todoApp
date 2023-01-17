@@ -1,5 +1,5 @@
 const express = require("express");
-const { register, login } = require("../controllers/userController");
+const { register, login, getUser } = require("../controllers/userController");
 
 //import middlewares
 const auth = require("../middlware/auth");
@@ -12,6 +12,9 @@ rootRouter.post("/register", register);
 
 //POST /login
 rootRouter.get("/login", login);
+
+//GET /user
+rootRouter.get("/user", auth, getUser);
 
 //Todo routes
 rootRouter.use("/todo", auth, todoRouter);

@@ -1,10 +1,5 @@
 import { redirect } from "react-router-dom";
-import {
-  createAccount,
-  createSession,
-  deleteSession,
-  getUser,
-} from "../bridge/user";
+import { register, login, logout } from "../bridge/user";
 import {
   addTask,
   createTodo,
@@ -58,7 +53,7 @@ export const createUserAction = async ({ params, request }) => {
   const password = formData.get("password");
   const username = formData.get("username");
 
-  await createAccount(email, password, username);
+  await register(email, password, username);
 
   return redirect(`/login`);
 };
@@ -68,8 +63,7 @@ export const loginUserAction = async ({ params, request }) => {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  await createSession(email, password);
-  const user = await getUser();
+  const user = await login(email, password);
 
   if (user) {
     return redirect(`/dashboard`);
@@ -79,8 +73,7 @@ export const loginUserAction = async ({ params, request }) => {
 };
 
 export const logoutUserAction = async ({ params, request }) => {
-  await deleteSession();
-  const user = await getUser();
+  const user = await logout();
 
   if (user) {
     return redirect(`/dashboard`);

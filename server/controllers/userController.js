@@ -121,7 +121,26 @@ const login = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.user.id);
+
+    return res.send({
+      status: "success",
+      user: user,
+    });
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      res.status(401).json({ message: "Login UnSuccessfull", data: error });
+    } else {
+      res.status(501).json({ message: "Login UnSuccessfull", data: error });
+      console.log(error);
+    }
+  }
+};
+
 module.exports = {
   register,
   login,
+  getUser,
 };
