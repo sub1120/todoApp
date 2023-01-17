@@ -11,7 +11,7 @@ const rootRouter = express.Router();
 rootRouter.post("/register", register);
 
 //POST /login
-rootRouter.get("/login", login);
+rootRouter.post("/login", login);
 
 //GET /user
 rootRouter.get("/user", auth, getUser);

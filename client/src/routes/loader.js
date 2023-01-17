@@ -1,11 +1,18 @@
 import { redirect } from "react-router-dom";
 import { fetchTodo, fetchTodos } from "../bridge/todo";
+import { getUser } from "../bridge/user";
 
 export const rootLoader = () => {
   redirect("/dashboard");
 };
 
 export const todoListLoader = async ({ params, request }) => {
+  const user = await getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
   const url = new URL(request.url);
   const order = url.searchParams.get("sort");
   const searchTitle = url.searchParams.get("q");
@@ -54,4 +61,24 @@ export const todoLoader = async ({ params }) => {
     : null;
 
   return updatedData;
+};
+
+export const signupLoader = async () => {
+  const user = await getUser();
+
+  if (user) {
+    return redirect("/dashboard");
+  }
+
+  return null;
+};
+
+export const loginLoader = async () => {
+  const user = await getUser();
+
+  if (user) {
+    return redirect("/dashboard");
+  }
+
+  return null;
 };
