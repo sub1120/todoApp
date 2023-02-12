@@ -25,8 +25,6 @@ Body
 ```
 GET /api/v1/todo
 ```
-
-<<<<<<< HEAD
 Body
 
 ```JSON
@@ -35,8 +33,6 @@ Body
 }
 ```
 
-=======
->>>>>>> 7a71e6ef979e02c5318a98628821ff3131826385
 Optional Query Params
 |Param| Description|
 |-----|------------|
@@ -48,7 +44,6 @@ Optional Query Params
 ```
 POST api/v1/todo/:todoId
 ```
-<<<<<<< HEAD
 
 Body
 
@@ -57,8 +52,6 @@ Body
   "userId": "12sada3"
 }
 ```
-=======
->>>>>>> 7a71e6ef979e02c5318a98628821ff3131826385
 
 ### 4. Delete Unique Todo
 
@@ -66,7 +59,6 @@ Body
 DEL api/v1/todo/:todoId
 ```
 
-<<<<<<< HEAD
 Body
 
 ```JSON
@@ -75,8 +67,6 @@ Body
 }
 ```
 
-=======
->>>>>>> 7a71e6ef979e02c5318a98628821ff3131826385
 ### 5. Edit Title
 
 ```
@@ -133,5 +123,3 @@ Body
   "userId": "12sada3"
 }
 ```
-=======
->>>>>>> 7a71e6ef979e02c5318a98628821ff3131826385
