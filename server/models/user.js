@@ -4,19 +4,19 @@ const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     lowercase: true,
-    required: [true, "Required"],
-    match: [/^[a-zA-Z\s]+$/, "Only letters allowed"],
+    required: [true, "UserName Required"],
+    match: [/^[a-zA-Z\s]+$/, "Invalid UserName"],
   },
   email: {
     type: String,
     unique: true,
     lowercase: true,
-    required: [true, "Required"],
-    match: [/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/, "Invalid email address"],
+    required: [true, "Email Required"],
+    match: [/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/, "Invalid Email"],
   },
   password: {
     type: String,
-    required: [true, "Required"],
+    required: [true, "Password Required"],
   },
 });
 

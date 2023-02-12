@@ -2,14 +2,21 @@ const UserModel = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+/******************************************************
+ * @SIGNUP
+ * @route http://localhost:4000/api/v1/signup
+ * @description User register Controller for creating new user
+ * @parameters name, email, password
+ * @returns An Object
+ ******************************************************/
 const register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
     if (!email) {
       return res.status(401).json({
-        message: "Registration UnSuccessfull",
-        data: {
+        success: false,
+        error: {
           name: "ValidationError",
           message: "Email Required",
         },
@@ -19,10 +26,10 @@ const register = async (req, res) => {
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
       return res.status(401).json({
-        message: "Registration UnSuccessfull",
-        data: {
+        success: false,
+        error: {
           name: "ValidationError",
-          message: "Email already exists",
+          message: "Email Already Exists",
         },
       });
     }
