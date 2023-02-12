@@ -114,7 +114,6 @@ Body
 ```
 DEL api/v1/todo/:todoId/:taskId
 ```
-<<<<<<< HEAD
 
 Body
 
